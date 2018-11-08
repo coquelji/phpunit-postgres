@@ -19,7 +19,8 @@ RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-de
 # Goto temporary directory. 
 WORKDIR /tmp
 # Run composer and phpunit installation. 
-RUN composer selfupdate && \
+RUN curl -fsSL https://getcomposer.org/installer | php \
+    composer selfupdate && \
     composer require "phpunit/phpunit:~5.3.4" --prefer-source --no-interaction && \
     ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
 
