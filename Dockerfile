@@ -22,8 +22,8 @@ WORKDIR /tmp
 # Run composer and phpunit installation. 
 RUN curl -fsSL https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
-    && composer global require phpunit/phpunit ^5.7 --no-progress --no-scripts --no-interaction
-    ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
+    && composer global require phpunit/phpunit ^5.7 --no-progress --no-scripts --no-interaction \
+    && ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
 
 # Set up the application directory. 
 VOLUME ["/app"]
