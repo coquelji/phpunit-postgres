@@ -16,8 +16,6 @@ RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-de
         sockets \
         intl 
 
-# Goto temporary directory. 
-WORKDIR /tmp
 # Run composer and phpunit installation. 
 RUN curl -fsSL https://getcomposer.org/installer | php \
     composer selfupdate && \
