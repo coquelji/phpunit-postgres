@@ -1,4 +1,5 @@
-FROM php:7-fpm
+FROM composer/composer:php7
+
 # Install modules
 RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev" && \
     apt-get update && \
@@ -20,11 +21,10 @@ RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-de
 WORKDIR /tmp
 
 # Run composer and phpunit installation. 
-RUN curl -fsSL https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && composer global require phpunit/phpunit ^5.7 --no-progress --no-scripts --no-interaction \
-    && ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
-
+RUN composer selfupdate && \
+    composer require "phpunit/phpunit:~5.3.4" --prefer-source --no-interaction && \
+    ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
+    
 # Set up the application directory. 
 VOLUME ["/app"]
 WORKDIR /app
