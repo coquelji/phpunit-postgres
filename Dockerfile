@@ -20,4 +20,9 @@ RUN curl -fsSL https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && composer global require phpunit/phpunit ^5.7 --no-progress --no-scripts --no-interaction
 
-CMD ["phpunit"]
+# Set up the application directory. 
+VOLUME ["/app"]
+WORKDIR /app
+# Set up the command arguments. 
+ENTRYPOINT ["/usr/local/bin/phpunit"]
+CMD ["--help"]
