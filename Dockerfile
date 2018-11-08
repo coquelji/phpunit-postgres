@@ -16,10 +16,13 @@ RUN buildDeps="libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev li
         sockets \
         intl
         
-RUN apt-get install git
-
-RUN curl -fsSL https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && composer global require phpunit/phpunit ^5.7 --no-progress --no-scripts --no-interaction
+ENV PHPUNIT_VERSION 6.5.3
+RUN mkdir -p /root/src \
+    && cd /root/src \
+    && wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar \ 
+    && chmod +x phpunit-${PHPUNIT_VERSION}.phar \ 
+    && mv phpunit-${PHPUNIT_VERSION}.phar /usr/local/bin/phpunit \ 
+    && rm -rf /root/src \
+    && phpunit --version
 
 CMD ["phpunit"]
