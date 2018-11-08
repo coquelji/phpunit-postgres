@@ -15,4 +15,9 @@ RUN buildDeps="libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev li
         pgsql \
         sockets \
         intl
-CMD ["php-fpm"]
+        
+RUN curl -fsSL https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer global require phpunit/phpunit ^5.7 --no-progress --no-scripts --no-interaction
+
+CMD ["phpunit"]
