@@ -4,13 +4,9 @@ FROM composer/composer:php7
 RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
-    firefox-esr=52.6.0esr-1~deb9u1 && \
     chromium=62.0.3202.89-1~deb9u1 && \
-    git-core=1:2.11.0-3+deb9u2 && \
     xvfb=2:1.19.2-1+deb9u2 && \
     xsel=1.2.0-2+b1 && \
-    unzip=6.0-21 && \
-    python-pytest=3.0.6-1 && \
     libgconf2-4=3.2.6-4+b1 && \
     libncurses5=6.0+20161126-1+deb9u2 && \
     libxml2-dev=2.9.4+dfsg1-2.2+deb9u2 && \
