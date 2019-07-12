@@ -7,12 +7,6 @@ RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-de
     chromium=62.0.3202.89-1~deb9u1 && \
     xvfb=2:1.19.2-1+deb9u2 && \
     xsel=1.2.0-2+b1 && \
-    libgconf2-4=3.2.6-4+b1 && \
-    libncurses5=6.0+20161126-1+deb9u2 && \
-    libxml2-dev=2.9.4+dfsg1-2.2+deb9u2 && \
-    libxslt-dev && \
-    libz-dev && \
-    xclip=0.12+svn84-4+b1 && \
     ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16/MagickWand-config /usr/bin && \
     pecl install imagick && \
     echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini && \
