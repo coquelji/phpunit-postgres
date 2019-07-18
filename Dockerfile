@@ -43,7 +43,7 @@ RUN wget -q "https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux
 # xvfb - X server display
 ADD xvfb-chromium /usr/bin/chromium
 RUN ln -s /usr/bin/chromium /usr/bin/google-chrome \
-    && chmod 777 /usr/bin/xvfb-chromium
+    && chmod 777 /usr/bin/chromium
 
 # create symlinks to chromedriver and geckodriver (to the PATH)
 RUN ln -s /usr/bin/geckodriver /usr/bin/chromium-browser \
