@@ -41,7 +41,6 @@ RUN wget -q "https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux
     && rm /tmp/chromedriver.zip
 
 # xvfb - X server display
-ADD xvfb-chromium /usr/bin/chromium
 RUN ln -s /usr/bin/chromium /usr/bin/google-chrome \
     && chmod 777 /usr/bin/chromium
 
