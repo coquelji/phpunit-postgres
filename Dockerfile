@@ -26,6 +26,7 @@ WORKDIR /tmp
 
 # Run composer and phpunit installation. 
 RUN composer selfupdate && \
+    composer update && \
     composer require "phpunit/phpunit:~5.3.4" --prefer-source --no-interaction && \
     ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
 
@@ -40,8 +41,8 @@ RUN wget -q "https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux
     && rm /tmp/chromedriver.zip
 
 # xvfb - X server display
-ADD xvfb-chromium /usr/bin/xvfb-chromium
-RUN ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome \
+ADD xvfb-chromium /usr/bin/chromium
+RUN ln -s /usr/bin/chromium /usr/bin/google-chrome \
     && chmod 777 /usr/bin/xvfb-chromium
 
 # create symlinks to chromedriver and geckodriver (to the PATH)
