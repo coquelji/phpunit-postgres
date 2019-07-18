@@ -1,11 +1,9 @@
 FROM composer/composer:php7
 
 # Install modules
-RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev" && \
+RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
-    chromium=62.0.3202.89-1~deb9u1 && \
-    xvfb=2:1.19.2-1+deb9u2 && \
     xsel=1.2.0-2+b1 && \
     ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16/MagickWand-config /usr/bin && \
     pecl install imagick && \
