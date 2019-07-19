@@ -28,6 +28,7 @@ WORKDIR /tmp
 RUN composer selfupdate && \
     composer require "phpunit/phpunit:~5.3.4" --prefer-source --no-interaction && \
     composer require "phpunit/phpunit-selenium: 3.0.3" --prefer-source --no-interaction && \
+    composer dump-autoload && \
     ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
 
 # GeckoDriver v0.19.1
