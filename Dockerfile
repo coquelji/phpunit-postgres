@@ -26,11 +26,11 @@ WORKDIR /tmp
 
 # Run composer and phpunit installation. 
 RUN composer selfupdate && \
-    composer require "phpunit/phpunit": "^5.7" --prefer-source --no-interaction && \
+    composer require "phpunit/phpunit: ^5.7" --prefer-source --no-interaction && \
     composer require "phpunit/phpunit-selenium: 3.0.3" --prefer-source --no-interaction && \
-    composer require "mikey179/vfsStream": "1.1.*"  --prefer-source --no-interaction && \
-	composer require "kenjis/ci-phpunit-test": "^0.16.1"  --prefer-source --no-interaction && \
-	composer require "facebook/webdriver": "^1.7"  --prefer-source --no-interaction && \
+    composer require "mikey179/vfsStream: 1.1.*"  --prefer-source --no-interaction && \
+    composer require "kenjis/ci-phpunit-test: ^0.16.1"  --prefer-source --no-interaction && \
+    composer require "facebook/webdriver: ^1.7"  --prefer-source --no-interaction && \
     composer dump-autoload && \
     ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
 
