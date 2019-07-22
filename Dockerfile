@@ -1,7 +1,10 @@
 FROM composer/composer:php7
 
+
+RUN apt-get update && apt-get install -y xvfb chromium-browser curl unzip libgconf-2-4
+
 # Install modules
-RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
+RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev xvfb chromium-browser" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
@@ -45,8 +48,10 @@ RUN wget -q "https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux
     && rm /tmp/chromedriver.zip
 
 # xvfb - X server display
-RUN ln -s /usr/bin/chromium /usr/bin/google-chrome \
-    && chmod 777 /usr/bin/chromium
+RUN mv /usr/bin/chromium-browser /usr/bin/chromium-browser-real
+ADD xvfb-chromium /usr/bin/xvfb-chromium
+RUN ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome
+RUN ln -s /usr/bin/xvfb-chromium /usr/bin/chromium-browser
 
 # create symlinks to chromedriver and geckodriver (to the PATH)
 RUN ln -s /usr/bin/geckodriver /usr/bin/chromium-browser \
