@@ -1,8 +1,5 @@
 FROM composer/composer:php7
 
-
-RUN apt-get update && apt-get install -y xvfb chromium-browser curl unzip libgconf-2-4
-
 # Install modules
 RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev xvfb chromium-browser" && \
     apt-get update && \
