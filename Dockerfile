@@ -1,4 +1,8 @@
-FROM composer/composer:php7
+FROM php:7.3-apache
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php composer-setup.php --install-dir=. --filename=composer
+RUN mv composer /usr/local/bin/
 
 # Install modules
 RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
@@ -23,12 +27,6 @@ RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-de
 
 # Goto temporary directory. 
 WORKDIR /tmp
-
-ENV APACHE_DOCUMENT_ROOT /app
-
-RUN sed -ri -e 's!/app!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/app!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-RUN a2enmod rewrite
 
 # Run composer and phpunit installation. 
 RUN composer selfupdate && \
@@ -58,7 +56,8 @@ RUN ln -s /usr/bin/chromium /usr/bin/google-chrome \
 RUN ln -s /usr/bin/geckodriver /usr/bin/chromium-browser \
     && chmod 777 /usr/bin/geckodriver \
     && chmod 777 /usr/bin/chromium-browser
-
+    
+EXPOSE 80
     
 # Set up the application directory. 
 VOLUME ["/app"]
