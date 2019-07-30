@@ -1,11 +1,7 @@
 FROM composer/composer:php7
 
-RUN yum -y install httpd
-RUN usr/sbin/httpd
-EXPOSE 80
-
 # Install modules
-RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
+RUN buildDeps="git yum libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
@@ -24,6 +20,10 @@ RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-de
         pgsql \
         sockets \
         intl 
+
+RUN yum -y install httpd
+RUN usr/sbin/httpd
+EXPOSE 80
 
 # Goto temporary directory. 
 WORKDIR /tmp
