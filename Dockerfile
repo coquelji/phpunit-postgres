@@ -8,10 +8,6 @@ RUN mv composer /usr/local/bin/
 RUN buildDeps="git libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
-    xsel=1.2.0-2+b1 && \
-    ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16/MagickWand-config /usr/bin && \
-    pecl install imagick && \
-    echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-install \
