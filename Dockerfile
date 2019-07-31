@@ -30,7 +30,7 @@ RUN echo "ServerName localhost" >> $APACHE_CONF_FILE
 # On cache la signature du serveur
 RUN echo "ServerSignature Off" >> $APACHE_CONF_FILE
 RUN echo "ServerTokens Prod" >> $APACHE_CONF_FILE
-RUN sed -i 'NameVirtualHost *:80 <VirtualHost *:80>  ServerName localhost  DocumentRoot "/app"</VirtualHost>' /etc/apache2/httpd.conf
+RUN echo "NameVirtualHost *:80 <VirtualHost *:80>  ServerName localhost  DocumentRoot '/app'</VirtualHost>" >> /etc/apache2/httpd.conf
 
 # On active HTTP2
 #RUN echo "Protocols h2 http/1.1" >> $APACHE_CONF_FILE
