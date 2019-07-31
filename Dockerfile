@@ -22,7 +22,6 @@ RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpa
         intl 
 
 RUN a2enmod rewrite
-RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 RUN /etc/init.d/apache2 restart
 EXPOSE 80
 
