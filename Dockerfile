@@ -46,9 +46,6 @@ RUN echo "IncludeOptional /srv/conf/apache/*.conf" >> $APACHE_CONF_FILE
 RUN echo "IncludeOptional /srv/conf/apache/sites/*.conf" >> $APACHE_CONF_FILE
 
 
-# On cré le dossier où seront stockés les sites
-RUN mkdir /app
-
 # On cré le dossier où seront stockés les logs des sites
 RUN mkdir /app/logs
 RUN mkdir /app/logs/error
