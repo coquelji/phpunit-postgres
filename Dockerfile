@@ -42,7 +42,6 @@ RUN rm -f /etc/apache2/sites-available/*
 
 
 # On inclu les fichiers de conf
-ADD app/conf/apache/ /app/conf/apache/
 RUN echo "IncludeOptional /srv/conf/apache/*.conf" >> $APACHE_CONF_FILE
 RUN echo "IncludeOptional /srv/conf/apache/sites/*.conf" >> $APACHE_CONF_FILE
 
