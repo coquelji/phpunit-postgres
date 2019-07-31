@@ -42,8 +42,8 @@ RUN rm -f /etc/apache2/sites-available/*
 
 
 # On inclu les fichiers de conf
-RUN echo "IncludeOptional /srv/conf/apache/*.conf" >> $APACHE_CONF_FILE
-RUN echo "IncludeOptional /srv/conf/apache/sites/*.conf" >> $APACHE_CONF_FILE
+RUN echo "IncludeOptional /app/conf/apache/*.conf" >> $APACHE_CONF_FILE
+RUN echo "IncludeOptional /app/conf/apache/sites/*.conf" >> $APACHE_CONF_FILE
 
 # Redirection d'un port local vers l'exterieur
 EXPOSE 80
