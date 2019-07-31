@@ -45,13 +45,6 @@ RUN rm -f /etc/apache2/sites-available/*
 RUN echo "IncludeOptional /srv/conf/apache/*.conf" >> $APACHE_CONF_FILE
 RUN echo "IncludeOptional /srv/conf/apache/sites/*.conf" >> $APACHE_CONF_FILE
 
-
-# On cré le dossier où seront stockés les logs des sites
-RUN mkdir /app/logs
-RUN mkdir /app/logs/error
-RUN mkdir /app/logs/access
-
-
 # Redirection d'un port local vers l'exterieur
 EXPOSE 80
 EXPOSE 443
