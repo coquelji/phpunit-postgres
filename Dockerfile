@@ -1,7 +1,7 @@
 FROM composer/composer:php7
 
 # Install modules
-RUN buildDeps="git yum libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
+RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 ssl-cert libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libmagickwand-6.q16-dev chromium xvfb" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
@@ -21,8 +21,9 @@ RUN buildDeps="git yum libpq-dev libzip-dev libicu-dev libpng-dev libjpeg62-turb
         sockets \
         intl 
 
-RUN yum -y install httpd
-RUN usr/sbin/httpd
+RUN a2enmod rewrite
+RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
+RUN /etc/init.d/apache2 restart
 EXPOSE 80
 
 # Goto temporary directory. 
