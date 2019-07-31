@@ -40,11 +40,6 @@ RUN echo "ServerTokens Prod" >> $APACHE_CONF_FILE
 RUN rm -f /etc/apache2/sites-enabled/*
 RUN rm -f /etc/apache2/sites-available/*
 
-
-# On inclu les fichiers de conf
-RUN echo "IncludeOptional /app/conf/apache/*.conf" >> $APACHE_CONF_FILE
-RUN echo "IncludeOptional /app/conf/apache/sites/*.conf" >> $APACHE_CONF_FILE
-
 # Redirection d'un port local vers l'exterieur
 EXPOSE 80
 EXPOSE 443
