@@ -30,7 +30,6 @@ RUN echo "ServerName localhost" >> $APACHE_CONF_FILE
 # On cache la signature du serveur
 RUN echo "ServerSignature Off" >> $APACHE_CONF_FILE
 RUN echo "ServerTokens Prod" >> $APACHE_CONF_FILE
-RUN echo "NameVirtualHost *:80 <VirtualHost *:80>  ServerName localhost  DocumentRoot '/home/jenkins/workspace/bytel-mars-confradio-mefirst'</VirtualHost>" >> /etc/apache2/httpd.conf
 
 # On active HTTP2
 #RUN echo "Protocols h2 http/1.1" >> $APACHE_CONF_FILE
@@ -40,8 +39,22 @@ RUN echo "NameVirtualHost *:80 <VirtualHost *:80>  ServerName localhost  Documen
 RUN rm -f /etc/apache2/sites-enabled/*
 RUN rm -f /etc/apache2/sites-available/*
 
-RUN echo "<VirtualHost *:80> ServerName localhost ServerAlias localhost  DocumentRoot /home/jenkins/workspace/bytel-mars-confradio-mefirst/app  <Directory /home/jenkins/workspace/bytel-mars-confradio-mefirst/app>        AllowOverride All    </Directory></VirtualHost>" > //etc/apache2/sites-enabled/app.conf
-RUN echo "<VirtualHost *:80> ServerName localhost ServerAlias localhost  DocumentRoot /home/jenkins/workspace/bytel-mars-confradio-mefirst/app  <Directory /home/jenkins/workspace/bytel-mars-confradio-mefirst/app>        AllowOverride All    </Directory></VirtualHost>" > //etc/apache2/sites-available/app.conf
+RUN echo "<VirtualHost *:80> \n
+ServerName localhost \n
+ServerAlias localhost  \n
+DocumentRoot /home/jenkins/workspace/bytel-mars-confradio-mefirst/app  \n
+<Directory /home/jenkins/workspace/bytel-mars-confradio-mefirst/app>\n
+AllowOverride All \n
+</Directory>\n
+</VirtualHost>" > //etc/apache2/sites-enabled/app.conf
+RUN echo "<VirtualHost *:80> \n
+ServerName localhost \n
+ServerAlias localhost  \n
+DocumentRoot /home/jenkins/workspace/bytel-mars-confradio-mefirst/app  \n
+<Directory /home/jenkins/workspace/bytel-mars-confradio-mefirst/app>\n
+AllowOverride All \n
+</Directory>\n
+</VirtualHost>" > //etc/apache2/sites-available/app.conf
 
 # Redirection d'un port local vers l'exterieur
 EXPOSE 80
