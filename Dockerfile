@@ -1,7 +1,7 @@
 FROM composer/composer:php7
 
 # Install modules
-RUN buildDeps="git httpd libpq-dev libzip-dev libicu-dev" && \
+RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 ssl-cert curl httpd libpq-dev libzip-dev libicu-dev" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
@@ -18,8 +18,34 @@ RUN buildDeps="git httpd libpq-dev libzip-dev libicu-dev" && \
         sockets \
         intl 
 
-RUN /sbin/service httpd start
+RUN a2enmod rewrite
+# On cré les variables d'environement pour les utiliser plus facilement
+ENV APACHE_CONF_FILE /etc/apache2/apache2.conf
+
+
+# On ajoute localhost comme nom de serveur
+RUN echo "ServerName localhost" >> $APACHE_CONF_FILE
+
+
+# On cache la signature du serveur
+RUN echo "ServerSignature Off" >> $APACHE_CONF_FILE
+RUN echo "ServerTokens Prod" >> $APACHE_CONF_FILE
+RUN echo "NameVirtualHost *:80 <VirtualHost *:80>  ServerName localhost  DocumentRoot '/home/jenkins/workspace/bytel-mars-confradio-mefirst'</VirtualHost>" >> /etc/apache2/httpd.conf
+
+# On active HTTP2
+#RUN echo "Protocols h2 http/1.1" >> $APACHE_CONF_FILE
+
+
+# On supprime les configurations par defaut
+RUN rm -f /etc/apache2/sites-enabled/*
+RUN rm -f /etc/apache2/sites-available/*
+
+# Redirection d'un port local vers l'exterieur
 EXPOSE 80
+EXPOSE 443
+EXPOSE 8443
+
+RUN /etc/init.d/apache2 start
 
 # Goto temporary directory. 
 WORKDIR /tmp
