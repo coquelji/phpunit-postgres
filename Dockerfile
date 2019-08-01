@@ -1,7 +1,7 @@
 FROM composer/composer:php7
 
 # Install modules
-RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 ssl-cert curl httpd libpq-dev libzip-dev libicu-dev" && \
+RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 ssl-cert curl libpq-dev libzip-dev libicu-dev" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
@@ -39,6 +39,9 @@ RUN echo "NameVirtualHost *:80 <VirtualHost *:80>  ServerName localhost  Documen
 # On supprime les configurations par defaut
 RUN rm -f /etc/apache2/sites-enabled/*
 RUN rm -f /etc/apache2/sites-available/*
+
+RUN echo "<VirtualHost *:80> ServerName localhost ServerAlias localhost  DocumentRoot /home/jenkins/workspace/bytel-mars-confradio-mefirst/app  <Directory /home/jenkins/workspace/bytel-mars-confradio-mefirst/app>        AllowOverride All    </Directory></VirtualHost>" > //etc/apache2/sites-enabled/app.conf
+RUN echo "<VirtualHost *:80> ServerName localhost ServerAlias localhost  DocumentRoot /home/jenkins/workspace/bytel-mars-confradio-mefirst/app  <Directory /home/jenkins/workspace/bytel-mars-confradio-mefirst/app>        AllowOverride All    </Directory></VirtualHost>" > //etc/apache2/sites-available/app.conf
 
 # Redirection d'un port local vers l'exterieur
 EXPOSE 80
