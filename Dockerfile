@@ -41,6 +41,8 @@ RUN echo "ServerTokens Prod" >> $APACHE_CONF_FILE
 RUN rm -f /etc/apache2/sites-enabled/*
 RUN rm -f /etc/apache2/sites-available/*
 
+RUN mkdir /var/www/html/app
+
 RUN echo "<VirtualHost *:80> \nServerName localhost \nServerAlias localhost  \nDocumentRoot /var/www/html/app  \n<Directory /var/www/html/app>\nAllowOverride All \n</Directory>\n</VirtualHost>" > /etc/apache2/sites-enabled/app.conf
 RUN echo "<VirtualHost *:80> \nServerName localhost \nServerAlias localhost  \nDocumentRoot /var/www/html/app  \n<Directory /var/www/html/app>\nAllowOverride All \n</Directory>\n</VirtualHost>" > /etc/apache2/sites-available/app.conf
 
