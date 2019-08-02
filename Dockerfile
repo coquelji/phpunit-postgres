@@ -1,7 +1,7 @@
 FROM composer/composer:php7
 
 # Install modules
-RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 libapache2-mod-php7.0 ssl-cert curl libpq-dev libzip-dev libicu-dev" && \
+RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 libapache2-mod-php ssl-cert curl libpq-dev libzip-dev libicu-dev" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
