@@ -1,10 +1,9 @@
 FROM composer/composer:php7
 
 # Install modules
-RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 apt-transport-https ca-certificates libapache2-mod-php7.0 ssl-cert curl libpq-dev libzip-dev libicu-dev" && \
-    apt-get install -y wget && \
-    sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' && \
-    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 libapache2-mod-php7.0 ssl-cert curl libpq-dev libzip-dev libicu-dev" && \
+    apt-get install software-properties-common && \
+    apt-add-repository packages.sury.org/php && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
