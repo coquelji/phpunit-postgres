@@ -5,6 +5,7 @@ RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpa
     apt-get update && \
     apt-get -y --no-install-recommends install apt-transport-https ca-certificates software-properties-common && \
     apt-add-repository ppa:ondrej/php && \
+    apt search php7 && \
     apt-get install -y $buildDeps --no-install-recommends && \
     xsel=1.2.0-2+b1 && \
     pecl install xdebug && \
