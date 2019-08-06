@@ -25,7 +25,6 @@ RUN a2enmod php7
 # On cré les variables d'environement pour les utiliser plus facilement
 ENV APACHE_CONF_FILE /etc/apache2/apache2.conf
 
-
 # On ajoute localhost comme nom de serveur
 RUN echo "ServerName localhost" >> $APACHE_CONF_FILE
 RUN echo "Listen localhost:80" >> $APACHE_CONF_FILE
