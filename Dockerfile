@@ -55,7 +55,7 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 8443
 
-RUN /etc/init.d/apache2 start
+RUN /etc/init.d/apache2 restart
 
 # Goto temporary directory. 
 WORKDIR /tmp
