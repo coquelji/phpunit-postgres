@@ -12,8 +12,12 @@ RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpa
     echo 'zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so' > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     php -m | grep xdebug && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    docker-php-ext-install \
+    rm -rf /var/lib/apt/lists/*
+
+RUN a2enmod rewrite
+RUN a2enmod php5
+
+RUN docker-php-ext-install \
         opcache \
         pdo \
         pdo_pgsql \
@@ -21,8 +25,6 @@ RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpa
         sockets \
         intl 
 
-RUN a2enmod rewrite
-RUN a2enmod php5
 # On cré les variables d'environement pour les utiliser plus facilement
 ENV APACHE_CONF_FILE /etc/apache2/apache2.conf
 
