@@ -1,7 +1,7 @@
 FROM composer/composer:php7
 
 # Install modulesapt-transport-https ca-certificates software-properties-common
-RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 libapache2-mod-php5 libapache2-mod-php php-mcrypt php-cli php-psql php-gd php-recode php-tidy php-xmlrpc ssl-cert curl libpq-dev libzip-dev libicu-dev" && \
+RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpat1 libapache2-mod-php5 php-mcrypt php-cli php-psql php-gd php-recode php-tidy php-xmlrpc ssl-cert curl libpq-dev libzip-dev libicu-dev" && \
     apt-get update && \
     apt-get -y --no-install-recommends install apt-transport-https ca-certificates software-properties-common && \
     apt-add-repository ppa:ondrej/php && \
