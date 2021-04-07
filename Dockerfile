@@ -50,9 +50,12 @@ RUN mkdir /var/www/html/app
 
 RUN echo "<VirtualHost *:80> \nServerName localhost \nServerAlias localhost  \nDocumentRoot /var/www/html/app  \n<Directory /var/www/html/app>\nAllowOverride All \n</Directory>\n</VirtualHost>" > /etc/apache2/sites-enabled/app.conf
 RUN echo "<VirtualHost *:80> \nServerName localhost \nServerAlias localhost  \nDocumentRoot /var/www/html/app  \n<Directory /var/www/html/app>\nAllowOverride All \n</Directory>\n</VirtualHost>" > /etc/apache2/sites-available/app.conf
+RUN echo "<VirtualHost *:81> \nServerName localhost \nServerAlias localhost  \nDocumentRoot /var/www/html/app  \n<Directory /var/www/html/app>\nAllowOverride All \n</Directory>\n</VirtualHost>" > /etc/apache2/sites-enabled/app.conf
+RUN echo "<VirtualHost *:81> \nServerName localhost \nServerAlias localhost  \nDocumentRoot /var/www/html/app  \n<Directory /var/www/html/app>\nAllowOverride All \n</Directory>\n</VirtualHost>" > /etc/apache2/sites-available/app.conf
 
 # Redirection d'un port local vers l'exterieur
 EXPOSE 80
+EXPOSE 81
 EXPOSE 443
 EXPOSE 8443
 
