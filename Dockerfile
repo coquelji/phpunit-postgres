@@ -7,6 +7,7 @@ RUN buildDeps="git apache2 apache2-doc apache2-mpm-prefork apache2-utils libexpa
     apt-add-repository ppa:ondrej/php && \
     apt search php7 && \
     apt-get install -y $buildDeps --no-install-recommends && \
+    apt-get -y install postgresql && \
     xsel=1.2.0-2+b1 && \
     pecl install xdebug && \
     echo 'zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so' > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
